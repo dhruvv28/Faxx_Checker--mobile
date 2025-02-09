@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:faxx_checker/screens/welcome_screen.dart';
-
+import 'package:flutter_animate/flutter_animate.dart';
+import 'welcome_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -13,39 +13,40 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
     super.initState();
-    _navigateToLogin();
-  }
-
-  _navigateToLogin() async {
-    await Future.delayed(const Duration(seconds: 2));
-    if (!mounted) return;
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (context) => const WelcomeScreen()),
-    );
+    Future.delayed(const Duration(seconds: 3), () {
+      Navigator.pushReplacement(
+        context,
+        PageRouteBuilder(
+          pageBuilder: (context, animation, secondaryAnimation) => const WelcomeScreen(),
+          transitionsBuilder: (context, animation, secondaryAnimation, child) {
+            return FadeTransition(opacity: animation, child: child);
+          },
+        ),
+      );
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Theme.of(context).primaryColor,
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Icon(
-              Icons.check_circle_outline,
-              size: 80,
-              color: Colors.white,
-            ),
-            const SizedBox(height: 16),
+            Icon(
+              Icons.fact_check,
+              size: 100,
+              color: Theme.of(context).primaryColor,
+            )
+                .animate()
+                .scale(duration: 500.ms)
+                .then()
+                .shimmer(duration: 1200.ms),
+            const SizedBox(height: 24),
             Text(
               'FaxxChecker',
-              style: Theme.of(context).textTheme.headlineMedium?.copyWith(
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-            ),
+              style: Theme.of(context).textTheme.headlineLarge,
+            ).animate().fadeIn(delay: 300.ms).slideY(begin: 0.3),
           ],
         ),
       ),

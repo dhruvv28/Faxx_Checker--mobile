@@ -1,5 +1,5 @@
-name: faxx_checker
-description: A fact-checking application.
+name: fact_checker
+description: A Flutter fact-checking app with AI chatbot
 publish_to: 'none'
 version: 1.0.0+1
 
@@ -9,10 +9,13 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  http: ^1.1.0
   cupertino_icons: ^1.0.2
-  shared_preferences: ^2.2.2
-  provider: ^6.1.1
-  url_launcher: ^6.1.14 
+  flutter_animate: ^4.3.0
+  google_fonts: ^6.1.0
+  shimmer: ^3.0.0
+  flutter_staggered_animations: ^1.1.1
+  url_launcher: ^6.1.14
 
 dev_dependencies:
   flutter_test:
@@ -21,7 +24,3 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
-
-
-
-  
